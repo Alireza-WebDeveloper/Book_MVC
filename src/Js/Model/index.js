@@ -1,4 +1,6 @@
-const a = 10;
+const Store = {
+  book: [],
+  bookDetail: {},
+};
 
-
-export {a}
+export default Store;
