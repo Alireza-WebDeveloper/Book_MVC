@@ -1,6 +1,8 @@
+import { loadingDataBook } from './Book';
+
 const Store = {
   book: [],
   bookDetail: {},
 };
 
-export default Store;
+export { Store, loadingDataBook };

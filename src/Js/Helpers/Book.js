@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { API_URL } from './Base';
 
-const asyncGetBooks = async () => {
+const asyncGetBook = async () => {
   try {
     const response = await axios.get(`${API_URL}/book`);
     return response.data;
@@ -10,4 +10,13 @@ const asyncGetBooks = async () => {
   }
 };
 
-export { asyncGetBooks };
+const asyncGetBookDetail = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/book/${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export { asyncGetBookDetail, asyncGetBook };
