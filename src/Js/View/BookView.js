@@ -7,20 +7,20 @@ class BookView {
   _generateMarkUp() {
     return this.data
       .map((book) => {
-        return `<section class="bg-gray-200 p-2 rounded-lg space-y-2">
+        return `<section class="bg-gray-200 dark:bg-gray-700 p-2 rounded-lg space-y-2">
       <img
         src="${book.img}"
         class="w-full h-52 rounded-lg"
       />
       <div class="flex flex-col space-y-2">
-        <p class="text-lg">${book.name}</p>
-        <p class="text-sm">
+        <p class="text-lg text-black dark:text-white">${book.name}</p>
+        <p class="text-sm text-black dark:text-white">
           ${book.introduction.slice(0, 100)}
         </p>
 
         <a
           href="/book/${book.id}"
-          class="px-5 w-fit py-2.5 rounded-lg text-lg bg-gray-50 hover:bg-gray-100 dark:hover:bg-gray-800 flex gap-3 items-center"
+          class="px-5 w-fit py-2.5 rounded-lg text-lg bg-gray-50 dark:bg-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 flex gap-3 items-center"
         >
           <span>بخوانید</span>
           <span class="text-sm">◀</span>
