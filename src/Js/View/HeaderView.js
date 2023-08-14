@@ -3,30 +3,39 @@ class HeaderView {
   constructor() {
     this.data = {
       banner: {
-        img: 'https://img.freepik.com/free-photo/front-view-books-with-white-background_23-2148255835.jpg?w=740&t=st=1692018645~exp=1692019245~hmac=ed654b668f3d60b9782be8d2f975745e010028c91c137fccb9d171c7a47a1b49',
+        img: 'https://clipart-library.com/images_k/book-transparent-background/book-transparent-background-13.png',
       },
     };
+    this._parElement.addEventListener('click', this._changeTheme.bind(this));
   }
   // Create Html Element
   _generateMarkUp() {
-    return `<div class="flex flex-wrap justify-between p-3">
+    let theme = this._theme();
+
+    return `<div class="flex flex-wrap justify-between p-3 items-center">
       <section class="flex space-x-4">
         <a
           href="/"
-          class="px-5 py-2.5 rounded-lg text-xl hover:bg-gray-200 dark:hover:bg-gray-800"
+          class="px-5 py-2.5 rounded-lg text-2xl hover:bg-gray-200 dark:hover:bg-gray-800"
         >
           خانه
         </a>
       </section>
+       <section class='cursor-pointer toggle_Theme'>
+      ${
+        this._theme() === 'dark'
+          ? ` <i class="fa fa-moon text-4xl"></i>`
+          : ` <i class="fa fa-sun text-4xl"></i>`
+      }
+       </section>
     </div>
-    <section class="relative" id='banner'>
-      <img
-        src="${this.data.banner.img}"
-        alt="banner"
-        class="h-[80vh] w-full object-fill"
-      />
-     <div class='absolute top-0 w-full h-full flex justify-center items-center'>
-     <p class='  md:text-6xl text-4xl text-center animate-bounce'>معرفی جدید ترین کتاب ها</p></div>
+    <section class="relative h-[80vh] flex justify-evenly items-center flex-wrap bg-gray-50 dark:bg-gray-900" id='banner'>
+    <img
+    src="${this.data.banner.img}"
+    alt="banner"
+    class="h-80 w-80 object-fill"
+    />
+     <p class='md:text-6xl text-4xl text-center animate-bounce'>معرفی جدید ترین کتاب ها</p> 
     </section>`;
   }
   // Render
@@ -34,7 +43,52 @@ class HeaderView {
     const renderHtml = this._generateMarkUp();
     this._parElement.insertAdjacentHTML('beforeEnd', renderHtml);
   }
+  _changeTheme(e) {
+    if (e.target.closest('.toggle_Theme')) {
+      const htmlDom = document.querySelector('html');
+      if (htmlDom.className.includes('light')) {
+        htmlDom.classList.remove('light');
+        htmlDom.classList.add('dark');
+        this._LocalStorageSaveTheme('dark');
+        this._updateThemeIcon('dark');
+      } else {
+        htmlDom.classList.remove('dark');
+        htmlDom.classList.add('light');
+        this._LocalStorageSaveTheme('light');
+        this._updateThemeIcon('light');
+      }
+    }
+  }
+  _LocalStorageSaveTheme(value) {
+    localStorage.setItem('theme', JSON.stringify(value));
+  }
+  _LocalStorageLoadTheme() {
+    const storedTheme = JSON.parse(localStorage.getItem('theme'));
+    const htmlDom = document.querySelector('html');
 
+    if (storedTheme === 'dark') {
+      htmlDom.classList.remove('light');
+      htmlDom.classList.add('dark');
+    } else {
+      htmlDom.classList.remove('dark');
+      htmlDom.classList.add('light');
+    }
+  }
+  _theme() {
+    const storedTheme = JSON.parse(localStorage.getItem('theme'));
+    if (storedTheme === 'dark') {
+      return 'dark';
+    }
+    return 'light';
+  }
+  _updateThemeIcon(value) {
+    let toggle_Theme = this._parElement.querySelector('.toggle_Theme');
+    if (value === 'light') {
+      toggle_Theme.innerHTML = `<i class="fa fa-sun text-4xl"></i>`;
+    } else {
+      toggle_Theme.innerHTML = `<i class="fa fa-moon text-4xl"></i>`;
+    }
+  }
   _clear() {
     this._parElement.innerHTML = '';
   }

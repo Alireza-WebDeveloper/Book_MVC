@@ -12,6 +12,7 @@ const controllerLoadBook = async () => {
 
 (() => {
   HeaderView._render();
+  HeaderView._LocalStorageLoadTheme();
   if (location.pathname === '/') {
     controllerLoadBook();
   }
