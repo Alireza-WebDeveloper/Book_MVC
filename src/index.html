@@ -5,34 +5,19 @@
     <title>App</title>
     <link rel="stylesheet" href="style.css" />
     <script src="/src/Js/Controller/index.js" type="module"></script>
-    <!-- Swiper -->
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <div class="grid grid-cols-1 space-y-5">
       <!-- Header -->
-      <header class="flex flex-col">
-        <!-- Menu -->
-        <div class="flex flex-wrap justify-between p-2">
-          <section class="flex space-x-4">
-            <a
-              href="/"
-              class="px-5 py-2.5 rounded-lg text-xl hover:bg-gray-200 dark:hover:bg-gray-800"
-            >
-              خانه
-            </a>
-          </section>
-        </div>
-        <!-- Banner -->
-        <section class="relative">
-          <img
-            src="/src/public/image/banner/1.jpg"
-            alt="banner"
-            class="h-[75vh] w-full"
-          />
-          <button class="absolute top-[50%] left-0 text-4xl">◀</button>
-          <button class="absolute top-[50%] right-0 text-4xl">▶</button>
-        </section>
-      </header>
+      <header class="flex flex-col" id="header"></header>
       <!-- Main -->
       <main class="grid grid-cols-1 container mx-auto">
         <!-- Books -->

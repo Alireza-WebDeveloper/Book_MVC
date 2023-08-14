@@ -1,6 +1,6 @@
 import * as Model from '../Model/index';
 import BookView from '../View/BookView';
-
+import HeaderView from '../View/HeaderView';
 const controllerLoadBook = async () => {
   try {
     await Model.loadingDataBook();
@@ -11,6 +11,7 @@ const controllerLoadBook = async () => {
 };
 
 (() => {
+  HeaderView._render();
   if (location.pathname === '/') {
     controllerLoadBook();
   }
