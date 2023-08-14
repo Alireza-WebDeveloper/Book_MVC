@@ -12,7 +12,7 @@ class HeaderView {
   _generateMarkUp() {
     let theme = this._theme();
 
-    return `<div class="flex flex-wrap justify-between p-3 items-center">
+    return `<div class="flex flex-wrap md:justify-between justify-around p-3  items-center">
       <section class="flex space-x-4">
         <a
           href="/"
@@ -29,13 +29,18 @@ class HeaderView {
       }
        </section>
     </div>
-    <section class="relative h-[80vh] flex justify-evenly items-center flex-wrap bg-gray-50 dark:bg-gray-900" id='banner'>
+    <section class="relative p-2 bg-gray-50  flex justify-evenly items-center flex-wrap dark:bg-gray-800" id='banner'>
     <img
     src="${this.data.banner.img}"
     alt="banner"
-    class="h-80 w-80 object-fill"
+    class="md:w-[200px] md:h-[200px] w-[150px] h-[150px] object-fill"
     />
-     <p class='md:text-6xl text-4xl text-center animate-bounce'>معرفی جدید ترین کتاب ها</p> 
+     <p class='md:text-3xl hidden md:flex text-lg text-center animate-bounce'>
+     با داستان‌های انگیزشی کتاب، به دنبال تغییرات بزرگ در زندگی خود بگردید
+     </p> 
+     <p class='md:text-3xl md:hidden flex text-lg text-center animate-bounce'>
+     سفری به دنیای اشتیاق و ماجراجویی
+     </p> 
     </section>`;
   }
   // Render
