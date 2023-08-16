@@ -12,9 +12,9 @@ const controllerLoadBook = async () => {
   }
 };
 
-const controllerLoadBookDetail = async (id) => {
+const controllerLoadBookDetail = async (id = 1) => {
   try {
-    await Model.loadingDataBookDetail(1);
+    await Model.loadingDataBookDetail(id);
     BookDetailView._render(Model.Store.bookDetail);
   } catch (error) {
     alert(error.message);
@@ -29,6 +29,8 @@ const controllerLoadBookDetail = async (id) => {
     controllerLoadBook();
   }
   if (location.pathname.match(regexBookDetail)) {
-    controllerLoadBookDetail();
+    let parts = location.pathname.split('/');
+    let id = parts[parts.length - 1];
+    controllerLoadBookDetail(id);
   }
 })();

@@ -25,10 +25,10 @@ class BookDetailView {
     return `
     <section class='grid grid-cols-1 gap-10 p-3 rounded-md bg-gray-100 dark:bg-gray-800'>
 
-    <div class='grid md:grid-cols-3 grid-cols-1 gap-2'>
+    <div class='grid lg:grid-cols-3  grid-cols-1 gap-2'>
 
     <section>
-     <img src='${this.data.img}' class='h-80 w-full rounded-md'/>
+     <img src='${this.data.img}' class='lg:h-80 h-96 w-full rounded-md'/>
      </section>
 
      <section class='flex flex-col space-y-4 p-1 '>
