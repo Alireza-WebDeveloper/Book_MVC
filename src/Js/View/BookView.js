@@ -34,7 +34,6 @@ class BookView {
   _render(data) {
     this.data = data;
     const renderHtml = this._generateMarkUp();
-    console.log(this.data);
     this._parElement.insertAdjacentHTML(
       'beforeEnd',
       `
