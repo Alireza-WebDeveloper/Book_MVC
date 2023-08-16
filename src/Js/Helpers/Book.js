@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { API_URL } from './Base';
+import { BaseApi } from './Base';
 
 const asyncGetBook = async () => {
   try {
-    const response = await axios.get(`${API_URL}/book`);
+    const response = await BaseApi.get(`/book`);
     return response.data;
   } catch (error) {
     throw new Error(error.message);
@@ -12,7 +12,7 @@ const asyncGetBook = async () => {
 
 const asyncGetBookDetail = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/book/${id}`);
+    const response = await BaseApi.get(`/book/${id}`);
     return response.data;
   } catch (error) {
     throw new Error(error.message);

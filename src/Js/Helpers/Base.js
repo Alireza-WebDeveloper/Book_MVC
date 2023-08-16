@@ -1,3 +1,7 @@
-const API_URL = 'http://localhost:5007';
+import axios from 'axios';
 
-export { API_URL };
+const BaseApi = axios.create({
+  baseURL: 'http://localhost:5007',
+});
+
+export { BaseApi };
