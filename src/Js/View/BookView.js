@@ -15,7 +15,9 @@ class BookView {
         class="w-full h-52 rounded-lg"
       />
       <div class="flex flex-col space-y-2">
-        <p class="text-lg text-black dark:text-white">${book.name}</p>
+        <p class="text-lg  font-semibold text-black dark:text-white">${
+          book.name
+        }</p>
         <p class="text-sm text-black dark:text-white">
           ${book.introduction.slice(0, 100)}
         </p>
