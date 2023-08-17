@@ -24,13 +24,10 @@ class BookDetailView {
   _generateMarkUp() {
     return `
     <section class='grid grid-cols-1 gap-10 p-3 rounded-md bg-gray-100 dark:bg-gray-800'>
-
     <div class='grid lg:grid-cols-3  grid-cols-1 gap-2'>
-
     <section>
      <img src='${this.data.img}' class='lg:h-80 h-96 w-full rounded-md'/>
      </section>
-
      <section class='flex flex-col space-y-4 p-1 '>
      <h1 class='text-4xl font-bold'>${this.data.name}</h1>
      <div class='flex flex-col space-y-3'>
@@ -46,10 +43,8 @@ class BookDetailView {
      <span class='text-xl font-semibold'>انتشارات :  </span>
      <span class='text-lg'>${this.data.announcer}</span>
      </article>
-
      </div>
      </section>
-
      <div class='shadow-lg shadow-black rounded-lg p-2 flex flex-col'>
      <h1 class='text-4xl font-bold text-center'>چاپ</h1>
      <span class='h-1 bg-gray-300 w-full mt-3'></span>
@@ -57,7 +52,6 @@ class BookDetailView {
      ${this._generatePrintVersion()}
      </section>
      </div>
-     
     </div>
     <div class='flex flex-col space-y-10'>
      <section class='flex flex-col space-y-4'>
@@ -71,7 +65,6 @@ class BookDetailView {
     </div>
     </section>`;
   }
-
   // Render
   _render(data) {
     this.data = data;

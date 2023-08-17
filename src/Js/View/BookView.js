@@ -1,8 +1,10 @@
 class BookView {
   _parElement = document.querySelector('.book_View');
+
   constructor() {
     this.data = [];
   }
+
   // Create Html Element
   _generateMarkUp() {
     return this.data
@@ -30,6 +32,7 @@ class BookView {
       })
       .join('');
   }
+
   // Render
   _render(data) {
     this.data = data;
@@ -41,14 +44,17 @@ class BookView {
     ${renderHtml}
       </section>`;
   }
+
   _clear() {
     this._parElement.innerHTML = '';
   }
+
   _empty(message = 'همچین کتابی وجود ندارد') {
     this._parElement.innerHTML = `<div class='p-2'>
     <p class='text-4xl capitalize text-center'>${message}</p>
     </div>`;
   }
+
   _renderError(message) {
     this._parElement.innerHTML = `<div class='flex justify-center items-center'>
      <p class='text-4xl'>${message}</p>

@@ -46,6 +46,32 @@ class HeaderView {
     const renderHtml = this._generateMarkUp();
     this._parElement.insertAdjacentHTML('beforeEnd', renderHtml);
   }
+  // Update Theme Icon
+  _updateThemeIcon(value) {
+    let toggle_Theme = this._parElement.querySelector('.toggle_Theme');
+    if (value === 'light') {
+      toggle_Theme.innerHTML = `<i class="fa fa-sun text-4xl"></i>`;
+    } else {
+      toggle_Theme.innerHTML = `<i class="fa fa-moon text-4xl"></i>`;
+    }
+  }
+  // Save Theme On LocalStorage
+  _LocalStorageSaveTheme(value) {
+    localStorage.setItem('theme', JSON.stringify(value));
+  }
+  // Load Theme Of LocalStorage Run On Controller
+  _LocalStorageLoadTheme() {
+    const storedTheme = JSON.parse(localStorage.getItem('theme'));
+    const htmlDom = document.querySelector('html');
+    if (storedTheme === 'dark') {
+      htmlDom.classList.remove('light');
+      htmlDom.classList.add('dark');
+    } else {
+      htmlDom.classList.remove('dark');
+      htmlDom.classList.add('light');
+    }
+  }
+  // Change Theme
   _changeTheme(e) {
     if (e.target.closest('.toggle_Theme')) {
       const htmlDom = document.querySelector('html');
@@ -62,21 +88,7 @@ class HeaderView {
       }
     }
   }
-  _LocalStorageSaveTheme(value) {
-    localStorage.setItem('theme', JSON.stringify(value));
-  }
-  _LocalStorageLoadTheme() {
-    const storedTheme = JSON.parse(localStorage.getItem('theme'));
-    const htmlDom = document.querySelector('html');
-
-    if (storedTheme === 'dark') {
-      htmlDom.classList.remove('light');
-      htmlDom.classList.add('dark');
-    } else {
-      htmlDom.classList.remove('dark');
-      htmlDom.classList.add('light');
-    }
-  }
+  // Return Value Theme
   _theme() {
     const storedTheme = JSON.parse(localStorage.getItem('theme'));
     if (storedTheme === 'dark') {
@@ -84,14 +96,7 @@ class HeaderView {
     }
     return 'light';
   }
-  _updateThemeIcon(value) {
-    let toggle_Theme = this._parElement.querySelector('.toggle_Theme');
-    if (value === 'light') {
-      toggle_Theme.innerHTML = `<i class="fa fa-sun text-4xl"></i>`;
-    } else {
-      toggle_Theme.innerHTML = `<i class="fa fa-moon text-4xl"></i>`;
-    }
-  }
+
   _clear() {
     this._parElement.innerHTML = '';
   }
