@@ -49,6 +49,11 @@ class BookView {
     <p class='text-4xl capitalize text-center'>${message}</p>
     </div>`;
   }
+  _renderError(message) {
+    this._parElement.innerHTML = `<div class='flex justify-center items-center'>
+     <p class='text-4xl'>${message}</p>
+     </div>`;
+  }
 }
 
 export default new BookView();

@@ -76,15 +76,15 @@ class BookDetailView {
   _render(data) {
     this.data = data;
     const renderHtml = this._generateMarkUp();
-    this._parElement.insertAdjacentHTML(
-      'beforeEnd',
-      `
-      ${renderHtml}
-      `
-    );
+    this._parElement.innerHTML = `${renderHtml}`;
   }
   _clear() {
     this._parElement.innerHTML = '';
+  }
+  _renderError(message) {
+    this._parElement.innerHTML = `<div class='flex justify-center items-center'>
+     <p class='text-4xl'>${message}</p>
+     </div>`;
   }
 }
 
