@@ -34,20 +34,20 @@ class BookView {
   _render(data) {
     this.data = data;
     const renderHtml = this._generateMarkUp();
-    this._parElement.insertAdjacentHTML(
-      'beforeEnd',
-      `
-    <h1>لیست کتاب های موجود</h1>
+    this._parElement.innerHTML = `<h1>لیست کتاب های موجود</h1>
     <div
       class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5"
     >
     ${renderHtml}
-      </section>
-    `
-    );
+      </section>`;
   }
   _clear() {
     this._parElement.innerHTML = '';
+  }
+  _empty(message = 'همچین کتابی وجود ندارد') {
+    this._parElement.innerHTML = `<div class='p-2'>
+    <p class='text-4xl capitalize text-center'>${message}</p>
+    </div>`;
   }
 }
 
