@@ -4,7 +4,9 @@ import HeaderView from '../View/HeaderView';
 import BookDetailView from '../View/BookDetailView';
 import BookSearchFormView from '../View/BookSearchFormView';
 import { regexBookDetail } from '../../RegExr/BookDetail';
+import Swal from 'sweetalert2';
 
+// controller On BookView
 const controllerLoadBook = async () => {
   try {
     await Model.loadingDataBook();
@@ -20,6 +22,7 @@ const controllerSearchBook = (query = '') => {
   else BookView._render(Model.Store.bookSearch);
 };
 
+// Controller On BookDetail View
 const controllerLoadBookDetail = async (id = 1) => {
   try {
     await Model.loadingDataBookDetail(id);
@@ -29,22 +32,37 @@ const controllerLoadBookDetail = async (id = 1) => {
   }
 };
 
+// initialLoad
 const initialLoad = () => {
   HeaderView._render();
   HeaderView._LocalStorageLoadTheme();
+  // Book Page
   if (location.pathname === '/') {
     controllerLoadBook();
     BookSearchFormView._render();
     BookSearchFormView._handlerSearchBook(controllerSearchBook);
+    // BookDetail Page
   } else if (location.pathname.match(regexBookDetail)) {
     let parts = location.pathname.split('/');
     let id = parts[parts.length - 1];
     controllerLoadBookDetail(id);
+    // Not Found Page
   } else {
-    alert('همچین صفحه ای وجود ندارد');
-    setTimeout(() => {
-      location.pathname = '/';
-    }, 0);
+    Swal.fire({
+      text: 'همچین صفحه ای وجود ندارد',
+      icon: 'error',
+      confirmButtonColor: 'red',
+      confirmButtonText: 'Ok',
+      allowOutsideClick: false,
+      allowEnterKey: true,
+      backdrop: 'black',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setTimeout(() => {
+          location.pathname = '';
+        }, 100);
+      }
+    });
   }
 };
 
