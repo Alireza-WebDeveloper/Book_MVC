@@ -10,8 +10,6 @@ class HeaderView {
   }
   // Create Html Element
   _generateMarkUp() {
-    let theme = this._theme();
-
     return `<div class="flex flex-wrap md:justify-between justify-around p-3  items-center">
       <section class="flex space-x-4">
         <a
