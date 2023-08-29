@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { BaseApi } from './Base';
 
 const asyncGetBook = async () => {
