@@ -6,12 +6,18 @@ import BookSearchFormView from '../View/BookSearchFormView';
 import { regexBookDetail } from '../../RegExr/BookDetail';
 import FavoriteView from '../View/FavoriteView';
 import Swal from 'sweetalert2';
-import { updateBookAddFavorite, updateBookRemoveFavorite } from '../Model/Book';
+import {
+  updateBookAddFavorite,
+  updateBookRemoveFavorite,
+  updateBookWithFavoriteList,
+} from '../Model/Book';
 
 // controller On BookView
 const controllerLoadBook = async () => {
   try {
     await Model.loadingDataBook();
+    FavoriteView._loadFavoriteWithLocalStorage();
+    updateBookWithFavoriteList(FavoriteView.data);
     BookView._render(Model.Store.bookSearch);
   } catch (error) {
     BookView._renderError(error.message);
@@ -38,15 +44,18 @@ const controllerLoadBookDetail = async (id = 1) => {
 const controllerAddToFavorite = (newBook) => {
   FavoriteView._addToFavorite(newBook);
   updateBookAddFavorite(newBook.id);
-  BookView._render(Model.Store.book);
+  BookView._render(Model.Store.bookSearch);
 };
 const controllerRemoveOfFavorite = (newBook) => {
   FavoriteView._removeOfFavorite(newBook);
   updateBookRemoveFavorite(newBook.id);
-  BookView._render(Model.Store.book);
+  BookView._render(Model.Store.bookSearch);
 };
-
-const controllerLoadFavorite = () => {};
+const controllerLoadFavorite = () => {
+  FavoriteView._loadFavoriteWithLocalStorage();
+  FavoriteView._render();
+  FavoriteView._handleFavorite();
+};
 
 // initialLoad
 const initialLoad = () => {
@@ -66,7 +75,7 @@ const initialLoad = () => {
     controllerLoadBookDetail(id);
     // Not Found Page
   } else if (location.pathname === '/favorite') {
-    FavoriteView._render([]);
+    controllerLoadFavorite();
   } else {
     Swal.fire({
       text: 'همچین صفحه ای وجود ندارد',

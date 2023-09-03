@@ -9,14 +9,53 @@ class FavoriteView {
   _generateMarkUp() {
     return this.data
       .map((book) => {
-        return ``;
+        return `<section class="bg-gray-200 dark:bg-gray-700 p-2 rounded-lg space-y-2">
+      <img
+        src="${book.img}"
+        class="w-full h-52 rounded-lg"
+      />
+      <div class="flex flex-col space-y-2">
+        <p class="text-lg  font-semibold text-black dark:text-white">${
+          book.name
+        }</p>
+        <p class="text-sm text-black dark:text-white">
+          ${book.introduction.slice(0, 100)}
+        </p>
+
+       <div class='flex justify-between flex-wrap items-center'>
+       <a
+       href="/book/${book.id}"
+       class="px-5 w-fit py-2.5 rounded-lg text-lg bg-gray-50 dark:bg-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 flex gap-3 items-center"
+     >
+       <span>بخوانید</span>
+       <span class="text-sm">◀</span>
+       </a>
+       <button
+       data-code="${book.id}"
+       class="${
+         book.favorite && book.favorite === true
+           ? 'btn_removeFavorite'
+           : 'btn_addFavorite'
+       } px-2 w-fit py-1 rounded-lg text-sm bg-orange-50 dark:bg-gray-500 hover:bg-orange-100 dark:hover:bg-gray-800 flex gap-3 items-center"
+     >
+       <span>${
+         book.favorite && book.favorite === true
+           ? 'حذف به لیست'
+           : 'اضافه به لیست'
+       }</span>
+       </button>
+       </div>
+      </div>
+    </section>`;
       })
       .join('');
   }
 
   // Render
-  _render(data) {
-    this.data = data;
+  _render() {
+    if (this.data.length === 0) {
+      return this._empty();
+    }
     const renderHtml = this._generateMarkUp();
     this._parElement.innerHTML = `<h1>لیست کتاب های مورد علاقه</h1>
       <div
@@ -48,6 +87,23 @@ class FavoriteView {
   _removeOfFavorite(newBook) {
     this.data = this.data.filter((book) => book.id !== newBook.id);
     localStorage.setItem('favorite', JSON.stringify(this.data));
+  }
+  _loadFavoriteWithLocalStorage() {
+    const dataOfFavorite = localStorage.getItem('favorite');
+    if (dataOfFavorite) {
+      this.data = JSON.parse(dataOfFavorite);
+    }
+  }
+  _handleFavorite() {
+    this._parElement.addEventListener('click', (e) => {
+      let button = e.target.closest('.btn_removeFavorite');
+      if (button) {
+        let id = Number(button.dataset.code);
+        let findBook = this.data.find((book) => book.id === id);
+        this._removeOfFavorite({ ...findBook, favorite: false });
+        this._render();
+      }
+    });
   }
 }
 

@@ -26,9 +26,21 @@ const updateBookRemoveFavorite = (bookId) => {
   findBook.favorite = false;
 };
 
+const updateBookWithFavoriteList = (favorites) => {
+  Store.book.forEach((book) => {
+    favorites.forEach((favorite) => {
+      if (book.id === favorite.id) {
+        book.favorite = favorite.favorite;
+      }
+    });
+  });
+  Store.bookSearch = Store.book;
+};
+
 export {
   loadingDataBook,
   searchDataBook,
   updateBookAddFavorite,
   updateBookRemoveFavorite,
+  updateBookWithFavoriteList,
 };
