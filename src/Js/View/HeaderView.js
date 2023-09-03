@@ -18,6 +18,12 @@ class HeaderView {
         >
           خانه
         </a>
+        <a
+        href="/favorite"
+        class="px-5 py-2.5 rounded-lg text-2xl hover:bg-gray-200 dark:hover:bg-gray-800"
+      >
+       علاقه مندی
+      </a>
       </section>
        <section class='cursor-pointer toggle_Theme'>
       ${

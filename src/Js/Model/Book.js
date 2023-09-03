@@ -16,4 +16,19 @@ const searchDataBook = (query) => {
   Store.bookSearch = filter;
 };
 
-export { loadingDataBook, searchDataBook };
+const updateBookAddFavorite = (bookId) => {
+  const findBook = Store.book.find((book) => book.id === bookId);
+  findBook.favorite = true;
+};
+
+const updateBookRemoveFavorite = (bookId) => {
+  const findBook = Store.book.find((book) => book.id === bookId);
+  findBook.favorite = false;
+};
+
+export {
+  loadingDataBook,
+  searchDataBook,
+  updateBookAddFavorite,
+  updateBookRemoveFavorite,
+};

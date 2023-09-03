@@ -22,13 +22,29 @@ class BookView {
           ${book.introduction.slice(0, 100)}
         </p>
 
-        <a
-          href="/book/${book.id}"
-          class="px-5 w-fit py-2.5 rounded-lg text-lg bg-gray-50 dark:bg-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 flex gap-3 items-center"
-        >
-          <span>بخوانید</span>
-          <span class="text-sm">◀</span>
-        </a>
+       <div class='flex justify-between flex-wrap items-center'>
+       <a
+       href="/book/${book.id}"
+       class="px-5 w-fit py-2.5 rounded-lg text-lg bg-gray-50 dark:bg-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 flex gap-3 items-center"
+     >
+       <span>بخوانید</span>
+       <span class="text-sm">◀</span>
+       </a>
+       <button
+       data-code="${book.id}"
+       class="${
+         book.favorite && book.favorite === true
+           ? 'btn_removeFavorite'
+           : 'btn_addFavorite'
+       } px-2 w-fit py-1 rounded-lg text-sm bg-orange-50 dark:bg-gray-500 hover:bg-orange-100 dark:hover:bg-gray-800 flex gap-3 items-center"
+     >
+       <span>${
+         book.favorite && book.favorite === true
+           ? 'حذف به لیست'
+           : 'اضافه به لیست'
+       }</span>
+       </button>
+       </div>
       </div>
     </section>`;
       })
@@ -61,6 +77,26 @@ class BookView {
     this._parElement.innerHTML = `<div class='flex justify-center items-center'>
      <p class='text-4xl'>${message}</p>
      </div>`;
+  }
+  _handlerAddToFavorite(handle) {
+    this._parElement.addEventListener('click', (e) => {
+      let button = e.target.closest('.btn_addFavorite');
+      if (button) {
+        let id = Number(button.dataset.code);
+        let findBook = this.data.find((book) => book.id === id);
+        handle({ ...findBook, favorite: true });
+      }
+    });
+  }
+  _handlerRemoveOfFavorite(handle) {
+    this._parElement.addEventListener('click', (e) => {
+      let button = e.target.closest('.btn_removeFavorite');
+      if (button) {
+        let id = Number(button.dataset.code);
+        let findBook = this.data.find((book) => book.id === id);
+        handle({ ...findBook, favorite: false });
+      }
+    });
   }
 }
 

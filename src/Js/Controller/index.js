@@ -4,7 +4,9 @@ import HeaderView from '../View/HeaderView';
 import BookDetailView from '../View/BookDetailView';
 import BookSearchFormView from '../View/BookSearchFormView';
 import { regexBookDetail } from '../../RegExr/BookDetail';
+import FavoriteView from '../View/FavoriteView';
 import Swal from 'sweetalert2';
+import { updateBookAddFavorite, updateBookRemoveFavorite } from '../Model/Book';
 
 // controller On BookView
 const controllerLoadBook = async () => {
@@ -32,6 +34,20 @@ const controllerLoadBookDetail = async (id = 1) => {
   }
 };
 
+// Favorite
+const controllerAddToFavorite = (newBook) => {
+  FavoriteView._addToFavorite(newBook);
+  updateBookAddFavorite(newBook.id);
+  BookView._render(Model.Store.book);
+};
+const controllerRemoveOfFavorite = (newBook) => {
+  FavoriteView._removeOfFavorite(newBook);
+  updateBookRemoveFavorite(newBook.id);
+  BookView._render(Model.Store.book);
+};
+
+const controllerLoadFavorite = () => {};
+
 // initialLoad
 const initialLoad = () => {
   HeaderView._render();
@@ -41,12 +57,16 @@ const initialLoad = () => {
     controllerLoadBook();
     BookSearchFormView._render();
     BookSearchFormView._handlerSearchBook(controllerSearchBook);
+    BookView._handlerAddToFavorite(controllerAddToFavorite);
+    BookView._handlerRemoveOfFavorite(controllerRemoveOfFavorite);
     // BookDetail Page
   } else if (location.pathname.match(regexBookDetail)) {
     let parts = location.pathname.split('/');
     let id = parts[parts.length - 1];
     controllerLoadBookDetail(id);
     // Not Found Page
+  } else if (location.pathname === '/favorite') {
+    FavoriteView._render([]);
   } else {
     Swal.fire({
       text: 'همچین صفحه ای وجود ندارد',
