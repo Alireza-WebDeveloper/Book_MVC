@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 class FavoriteView {
   _parElement = document.querySelector('.favorite_View');
 
@@ -36,13 +37,13 @@ class FavoriteView {
          book.favorite && book.favorite === true
            ? 'btn_removeFavorite'
            : 'btn_addFavorite'
-       } px-2 w-fit py-1 rounded-lg text-sm bg-orange-50 dark:bg-gray-500 hover:bg-orange-100 dark:hover:bg-gray-800 flex gap-3 items-center"
-     >
-       <span>${
-         book.favorite && book.favorite === true
-           ? 'حذف به لیست'
-           : 'اضافه به لیست'
-       }</span>
+       } px-2 w-fit py-1   text-sm hover:bg-gray-100 dark:hover:bg-gray-900 rounded-full flex gap-3 items-center"
+    >
+      <span>${
+        book.favorite && book.favorite === true
+          ? ' <i class="fa-solid fa-bookmark fa-2x"></i>'
+          : '<i class="fa-regular fa-bookmark fa-2x"></i>'
+      }</span>
        </button>
        </div>
       </div>
@@ -94,6 +95,17 @@ class FavoriteView {
       this.data = JSON.parse(dataOfFavorite);
     }
   }
+
+  _errorAlert(message = '') {
+    Swal.fire({
+      position: 'top-center',
+      icon: 'error',
+      title: message,
+      showConfirmButton: false,
+      timer: 1000,
+    });
+  }
+
   _handleFavorite() {
     this._parElement.addEventListener('click', (e) => {
       let button = e.target.closest('.btn_removeFavorite');
@@ -102,6 +114,7 @@ class FavoriteView {
         let findBook = this.data.find((book) => book.id === id);
         this._removeOfFavorite({ ...findBook, favorite: false });
         this._render();
+        this._errorAlert('کتاب از لیست مورد علاقه حذف شد');
       }
     });
   }

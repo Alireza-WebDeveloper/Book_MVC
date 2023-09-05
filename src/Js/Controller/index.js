@@ -45,11 +45,13 @@ const controllerAddToFavorite = (newBook) => {
   FavoriteView._addToFavorite(newBook);
   updateBookAddFavorite(newBook.id);
   BookView._render(Model.Store.bookSearch);
+  BookView._successAlert('کتاب مورد علاقه شما اضافه شد');
 };
 const controllerRemoveOfFavorite = (newBook) => {
   FavoriteView._removeOfFavorite(newBook);
   updateBookRemoveFavorite(newBook.id);
   BookView._render(Model.Store.bookSearch);
+  BookView._errorAlert('کتاب از لیست مورد علاقه حذف شد');
 };
 const controllerLoadFavorite = () => {
   FavoriteView._loadFavoriteWithLocalStorage();

@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 class BookView {
   _parElement = document.querySelector('.book_View');
 
@@ -36,12 +37,12 @@ class BookView {
          book.favorite && book.favorite === true
            ? 'btn_removeFavorite'
            : 'btn_addFavorite'
-       } px-2 w-fit py-1 rounded-lg text-sm bg-orange-50 dark:bg-gray-500 hover:bg-orange-100 dark:hover:bg-gray-800 flex gap-3 items-center"
+       } px-2 w-fit py-1   text-sm hover:bg-gray-100 dark:hover:bg-gray-900  rounded-full flex gap-3 items-center"
      >
        <span>${
          book.favorite && book.favorite === true
-           ? 'حذف به لیست'
-           : 'اضافه به لیست'
+           ? ' <i class="fa-solid fa-bookmark fa-2x"></i>'
+           : '<i class="fa-regular fa-bookmark fa-2x"></i>'
        }</span>
        </button>
        </div>
@@ -71,6 +72,24 @@ class BookView {
     this._parElement.innerHTML = `<div class='p-2'>
     <p class='text-4xl capitalize text-center'>${message}</p>
     </div>`;
+  }
+  _successAlert(message = '') {
+    Swal.fire({
+      position: 'top-center',
+      icon: 'success',
+      title: message,
+      showConfirmButton: false,
+      timer: 1000,
+    });
+  }
+  _errorAlert(message = '') {
+    Swal.fire({
+      position: 'top-center',
+      icon: 'error',
+      title: message,
+      showConfirmButton: false,
+      timer: 1000,
+    });
   }
 
   _renderError(message) {
