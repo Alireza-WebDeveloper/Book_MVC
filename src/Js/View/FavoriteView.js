@@ -81,14 +81,17 @@ class FavoriteView {
        <p class='text-4xl'>${message}</p>
        </div>`;
   }
+
   _addToFavorite(newBook) {
     this.data = [...this.data, newBook];
     localStorage.setItem('favorite', JSON.stringify(this.data));
   }
+
   _removeOfFavorite(newBook) {
     this.data = this.data.filter((book) => book.id !== newBook.id);
     localStorage.setItem('favorite', JSON.stringify(this.data));
   }
+
   _loadFavoriteWithLocalStorage() {
     const dataOfFavorite = localStorage.getItem('favorite');
     if (dataOfFavorite) {
