@@ -10,4 +10,25 @@ const loadingDataBookDetail = async (id) => {
   }
 };
 
-export { loadingDataBookDetail };
+const updateBookDetailAddFavorite = () => {
+  Store.bookDetail.favorite = true;
+};
+
+const updateBookDetailRemoveFavorite = () => {
+  Store.bookDetail.favorite = false;
+};
+
+const updateBookDetailWithFavoriteList = (favorites) => {
+  favorites.forEach((favorite) => {
+    if (Store.bookDetail.id === favorite.id) {
+      Store.bookDetail.favorite = favorite.favorite;
+    }
+  });
+};
+
+export {
+  loadingDataBookDetail,
+  updateBookDetailAddFavorite,
+  updateBookDetailRemoveFavorite,
+  updateBookDetailWithFavoriteList,
+};

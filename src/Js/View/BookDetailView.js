@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 class BookDetailView {
   _parElement = document.querySelector('.bookDetail_View');
   constructor() {
@@ -29,6 +30,22 @@ class BookDetailView {
      <img src='${this.data.img}' class='lg:h-80 h-96 w-full rounded-md'/>
      </section>
      <section class='flex flex-col space-y-4 p-1 '>
+    <div>
+    <button
+     data-code="${this.data.id}"
+     class="${
+       this.data.favorite && this.data.favorite === true
+         ? 'btn_removeFavorite'
+         : 'btn_addFavorite'
+     } px-2 w-fit py-1 mr-auto   text-sm hover:bg-gray-50 dark:hover:bg-gray-900  rounded-full flex gap-3 items-center"
+   >
+     <span>${
+       this.data.favorite && this.data.favorite === true
+         ? '<i class="fa-solid fa-bookmark fa-2x"></i>'
+         : '<i class="fa-regular fa-bookmark fa-2x"></i>'
+     }</span>
+     </button>
+    </div>
      <h1 class='text-4xl font-bold'>${this.data.name}</h1>
      <div class='flex flex-col space-y-3'>
      <article class='flex items-center'>
@@ -78,6 +95,40 @@ class BookDetailView {
     this._parElement.innerHTML = `<div class='flex justify-center items-center'>
      <p class='text-4xl'>${message}</p>
      </div>`;
+  }
+  _handlerAddToFavorite(handler) {
+    this._parElement.addEventListener('click', (e) => {
+      let button = e.target.closest('.btn_addFavorite');
+      if (button) {
+        handler({ ...this.data, favorite: true });
+      }
+    });
+  }
+  _handlerRemoveOfFavorite(handler) {
+    this._parElement.addEventListener('click', (e) => {
+      let button = e.target.closest('.btn_removeFavorite');
+      if (button) {
+        handler({ ...this.data, favorite: false });
+      }
+    });
+  }
+  _successAlert(message = '') {
+    Swal.fire({
+      position: 'top-center',
+      icon: 'success',
+      title: message,
+      showConfirmButton: false,
+      timer: 1000,
+    });
+  }
+  _errorAlert(message = '') {
+    Swal.fire({
+      position: 'top-center',
+      icon: 'error',
+      title: message,
+      showConfirmButton: false,
+      timer: 1000,
+    });
   }
 }
 

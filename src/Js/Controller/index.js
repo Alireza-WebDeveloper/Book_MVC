@@ -11,6 +11,11 @@ import {
   updateBookRemoveFavorite,
   updateBookWithFavoriteList,
 } from '../Model/Book';
+import {
+  updateBookDetailAddFavorite,
+  updateBookDetailRemoveFavorite,
+  updateBookDetailWithFavoriteList,
+} from '../Model/BookDetail';
 
 // controller On BookView
 const controllerLoadBook = async () => {
@@ -34,6 +39,8 @@ const controllerSearchBook = (query = '') => {
 const controllerLoadBookDetail = async (id = 1) => {
   try {
     await Model.loadingDataBookDetail(id);
+    FavoriteView._loadFavoriteWithLocalStorage();
+    updateBookDetailWithFavoriteList(FavoriteView.data);
     BookDetailView._render(Model.Store.bookDetail);
   } catch (error) {
     BookDetailView._renderError('همچین صفحه ای وجود ندارد');
@@ -41,18 +48,33 @@ const controllerLoadBookDetail = async (id = 1) => {
 };
 
 // Favorite
-const controllerAddToFavorite = (newBook) => {
+const controllerBookAddFavorite = (newBook) => {
   FavoriteView._addToFavorite(newBook);
   updateBookAddFavorite(newBook.id);
   BookView._render(Model.Store.bookSearch);
   BookView._successAlert('کتاب مورد علاقه شما اضافه شد');
 };
-const controllerRemoveOfFavorite = (newBook) => {
+const controllerBookRemoveFavorite = (newBook) => {
   FavoriteView._removeOfFavorite(newBook);
   updateBookRemoveFavorite(newBook.id);
   BookView._render(Model.Store.bookSearch);
   BookView._errorAlert('کتاب از لیست مورد علاقه حذف شد');
 };
+
+const controllerBookDetailAddFavorite = (newBook) => {
+  FavoriteView._addToFavorite(newBook);
+  updateBookDetailAddFavorite();
+  BookDetailView._render(Model.Store.bookDetail);
+  BookDetailView._successAlert('کتاب مورد علاقه شما اضافه شد');
+};
+
+const controllerBookDetailRemoveFavorite = (newBook) => {
+  FavoriteView._removeOfFavorite(newBook);
+  updateBookDetailRemoveFavorite();
+  BookDetailView._render(Model.Store.bookDetail);
+  BookDetailView._errorAlert('کتاب از لیست مورد علاقه حذف شد');
+};
+
 const controllerLoadFavorite = () => {
   FavoriteView._loadFavoriteWithLocalStorage();
   FavoriteView._render();
@@ -68,13 +90,15 @@ const initialLoad = () => {
     controllerLoadBook();
     BookSearchFormView._render();
     BookSearchFormView._handlerSearchBook(controllerSearchBook);
-    BookView._handlerAddToFavorite(controllerAddToFavorite);
-    BookView._handlerRemoveOfFavorite(controllerRemoveOfFavorite);
+    BookView._handlerAddToFavorite(controllerBookAddFavorite);
+    BookView._handlerRemoveOfFavorite(controllerBookRemoveFavorite);
     // BookDetail Page
   } else if (location.pathname.match(regexBookDetail)) {
     let parts = location.pathname.split('/');
     let id = parts[parts.length - 1];
     controllerLoadBookDetail(id);
+    BookDetailView._handlerAddToFavorite(controllerBookDetailAddFavorite);
+    BookDetailView._handlerRemoveOfFavorite(controllerBookDetailRemoveFavorite);
     // Not Found Page
   } else if (location.pathname === '/favorite') {
     controllerLoadFavorite();
