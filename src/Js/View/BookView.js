@@ -10,7 +10,7 @@ class BookView {
   _generateMarkUp() {
     return this.data
       .map((book) => {
-        return `<section class="bg-gray-200 dark:bg-gray-700 p-2 rounded-lg space-y-2">
+        return `<section class="bg-gray-200 dark:bg-gray-800 p-2 rounded-lg space-y-2">
       <img
         src="${book.img}"
         class="w-full h-52 rounded-lg"

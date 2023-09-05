@@ -10,7 +10,9 @@ class HeaderView {
   }
   // Create Html Element
   _generateMarkUp() {
-    return `<div class="flex flex-wrap md:justify-between justify-around p-3  items-center">
+    return `<div class="flex flex-wrap w-full   md:justify-between justify-around p-3 fixed top-0 z-50  items-center
+    inset-x-0  backdrop-filter  dark:backdrop-brightness-50 backdrop-blur-[8px]
+    ">
       <section class="flex space-x-4">
         <a
           href="/"
@@ -33,7 +35,7 @@ class HeaderView {
       }
        </section>
     </div>
-    <section class="relative p-2 bg-gray-50  flex justify-evenly items-center flex-wrap dark:bg-gray-800" id='banner'>
+    <section class="relative  mt-20 p-2 bg-gray-50  flex justify-evenly items-center flex-wrap dark:bg-gray-800" id='banner'>
     <img
     src="${this.data.banner.img}"
     alt="banner"
