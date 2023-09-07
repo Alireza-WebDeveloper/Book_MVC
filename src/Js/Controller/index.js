@@ -20,6 +20,7 @@ import {
 // controller On BookView
 const controllerLoadBook = async () => {
   try {
+    BookView._setTitlePage();
     await Model.loadingDataBook();
     FavoriteView._loadFavoriteWithLocalStorage();
     updateBookWithFavoriteList(FavoriteView.data);
@@ -42,6 +43,7 @@ const controllerLoadBookDetail = async (id = 1) => {
     FavoriteView._loadFavoriteWithLocalStorage();
     updateBookDetailWithFavoriteList(FavoriteView.data);
     BookDetailView._render(Model.Store.bookDetail);
+    BookDetailView._setTitlePage();
   } catch (error) {
     BookDetailView._renderError('همچین صفحه ای وجود ندارد');
   }
@@ -76,6 +78,7 @@ const controllerBookDetailRemoveFavorite = (newBook) => {
 };
 
 const controllerLoadFavorite = () => {
+  FavoriteView._setTitlePage();
   FavoriteView._loadFavoriteWithLocalStorage();
   FavoriteView._render();
   FavoriteView._handleFavorite();

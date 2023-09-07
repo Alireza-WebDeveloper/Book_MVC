@@ -130,6 +130,9 @@ class BookDetailView {
       timer: 1000,
     });
   }
+  _setTitlePage() {
+    document.title = `کتاب ${this.data.name}`;
+  }
 }
 
 export default new BookDetailView();

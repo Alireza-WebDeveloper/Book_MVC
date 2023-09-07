@@ -117,6 +117,9 @@ class BookView {
       }
     });
   }
+  _setTitlePage() {
+    document.title = 'کتاب خوانی پردیس';
+  }
 }
 
 export default new BookView();

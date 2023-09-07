@@ -121,6 +121,9 @@ class FavoriteView {
       }
     });
   }
+  _setTitlePage() {
+    document.title = `علاقه مندی`;
+  }
 }
 
 export default new FavoriteView();
