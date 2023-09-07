@@ -1,5 +1,6 @@
 class HeaderView {
   _parElement = document.querySelector('#header');
+
   constructor() {
     this.data = {
       banner: {
@@ -8,6 +9,7 @@ class HeaderView {
     };
     this._parElement.addEventListener('click', this._changeTheme.bind(this));
   }
+
   // Create Html Element
   _generateMarkUp() {
     return `<div class="flex flex-wrap w-full   md:justify-between justify-around p-3 fixed top-0 z-50  items-center
@@ -49,11 +51,13 @@ class HeaderView {
      </p> 
     </section>`;
   }
+
   // Render
   _render() {
     const renderHtml = this._generateMarkUp();
     this._parElement.insertAdjacentHTML('beforeEnd', renderHtml);
   }
+
   // Update Theme Icon
   _updateThemeIcon(value) {
     let toggle_Theme = this._parElement.querySelector('.toggle_Theme');
@@ -63,10 +67,12 @@ class HeaderView {
       toggle_Theme.innerHTML = `<i class="fa fa-moon text-4xl"></i>`;
     }
   }
+
   // Save Theme On LocalStorage
   _LocalStorageSaveTheme(value) {
     localStorage.setItem('theme', JSON.stringify(value));
   }
+
   // Load Theme Of LocalStorage Run On Controller
   _LocalStorageLoadTheme() {
     const storedTheme = JSON.parse(localStorage.getItem('theme'));
@@ -79,6 +85,7 @@ class HeaderView {
       htmlDom.classList.add('light');
     }
   }
+
   // Change Theme
   _changeTheme(e) {
     if (e.target.closest('.toggle_Theme')) {
@@ -96,6 +103,7 @@ class HeaderView {
       }
     }
   }
+
   // Return Value Theme
   _theme() {
     const storedTheme = JSON.parse(localStorage.getItem('theme'));

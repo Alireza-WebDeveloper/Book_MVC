@@ -121,6 +121,7 @@ class FavoriteView {
       }
     });
   }
+
   _setTitlePage() {
     document.title = `علاقه مندی`;
   }

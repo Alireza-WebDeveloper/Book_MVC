@@ -49,7 +49,7 @@ const controllerLoadBookDetail = async (id = 1) => {
   }
 };
 
-// Favorite
+// Favorite On BookView Page
 const controllerBookAddFavorite = (newBook) => {
   FavoriteView._addToFavorite(newBook);
   updateBookAddFavorite(newBook.id);
@@ -63,6 +63,7 @@ const controllerBookRemoveFavorite = (newBook) => {
   BookView._errorAlert('کتاب از لیست مورد علاقه حذف شد');
 };
 
+// Favorite On BookDetailView Page
 const controllerBookDetailAddFavorite = (newBook) => {
   FavoriteView._addToFavorite(newBook);
   updateBookDetailAddFavorite();
@@ -77,6 +78,7 @@ const controllerBookDetailRemoveFavorite = (newBook) => {
   BookDetailView._errorAlert('کتاب از لیست مورد علاقه حذف شد');
 };
 
+// Favorite Page
 const controllerLoadFavorite = () => {
   FavoriteView._setTitlePage();
   FavoriteView._loadFavoriteWithLocalStorage();

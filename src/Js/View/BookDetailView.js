@@ -1,9 +1,11 @@
 import Swal from 'sweetalert2';
+
 class BookDetailView {
   _parElement = document.querySelector('.bookDetail_View');
   constructor() {
     this.data = {};
   }
+
   _generateAbout() {
     return this.data.about
       .map((dt) => {
@@ -11,6 +13,7 @@ class BookDetailView {
       })
       .join('');
   }
+
   _generatePrintVersion() {
     return this.data.version.print
       .map((pr) => {
@@ -21,6 +24,7 @@ class BookDetailView {
       })
       .join('');
   }
+
   // Create Html Element
   _generateMarkUp() {
     return `
@@ -82,6 +86,7 @@ class BookDetailView {
     </div>
     </section>`;
   }
+
   // Render
   _render(data) {
     this.data = data;
@@ -96,6 +101,7 @@ class BookDetailView {
      <p class='text-4xl'>${message}</p>
      </div>`;
   }
+
   _handlerAddToFavorite(handler) {
     this._parElement.addEventListener('click', (e) => {
       let button = e.target.closest('.btn_addFavorite');
@@ -104,6 +110,7 @@ class BookDetailView {
       }
     });
   }
+
   _handlerRemoveOfFavorite(handler) {
     this._parElement.addEventListener('click', (e) => {
       let button = e.target.closest('.btn_removeFavorite');
@@ -112,6 +119,7 @@ class BookDetailView {
       }
     });
   }
+
   _successAlert(message = '') {
     Swal.fire({
       position: 'top-center',
@@ -121,6 +129,7 @@ class BookDetailView {
       timer: 1000,
     });
   }
+
   _errorAlert(message = '') {
     Swal.fire({
       position: 'top-center',
@@ -130,6 +139,7 @@ class BookDetailView {
       timer: 1000,
     });
   }
+
   _setTitlePage() {
     document.title = `کتاب ${this.data.name}`;
   }

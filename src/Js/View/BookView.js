@@ -73,6 +73,7 @@ class BookView {
     <p class='text-4xl capitalize text-center'>${message}</p>
     </div>`;
   }
+  
   _successAlert(message = '') {
     Swal.fire({
       position: 'top-center',
@@ -82,6 +83,7 @@ class BookView {
       timer: 1000,
     });
   }
+
   _errorAlert(message = '') {
     Swal.fire({
       position: 'top-center',
@@ -97,6 +99,7 @@ class BookView {
      <p class='text-4xl'>${message}</p>
      </div>`;
   }
+
   _handlerAddToFavorite(handle) {
     this._parElement.addEventListener('click', (e) => {
       let button = e.target.closest('.btn_addFavorite');
@@ -107,6 +110,7 @@ class BookView {
       }
     });
   }
+
   _handlerRemoveOfFavorite(handle) {
     this._parElement.addEventListener('click', (e) => {
       let button = e.target.closest('.btn_removeFavorite');
@@ -117,6 +121,7 @@ class BookView {
       }
     });
   }
+
   _setTitlePage() {
     document.title = 'کتاب خوانی پردیس';
   }
