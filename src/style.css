@@ -11,4 +11,14 @@
   html {
     font-family: BYekan;
   }
+  a {
+    textdecoration: 'none';
+    color: 'inherit';
+  }
+}
+
+.swiper-container {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }

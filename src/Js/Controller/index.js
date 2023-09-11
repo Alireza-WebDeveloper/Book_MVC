@@ -16,6 +16,7 @@ import {
   updateBookDetailRemoveFavorite,
   updateBookDetailWithFavoriteList,
 } from '../Model/BookDetail';
+import BookCarouselView from '../View/BookCarouselView';
 
 // controller On BookView
 const controllerLoadBook = async () => {
@@ -25,6 +26,7 @@ const controllerLoadBook = async () => {
     FavoriteView._loadFavoriteWithLocalStorage();
     updateBookWithFavoriteList(FavoriteView.data);
     BookView._render(Model.Store.bookSearch);
+    BookCarouselView._render(Model.Store.book.slice(7, 13));
   } catch (error) {
     BookView._renderError(error.message);
   }
