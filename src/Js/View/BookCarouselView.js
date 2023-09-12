@@ -39,7 +39,7 @@ class BookCarouselView {
     this.swiper = new Swiper('.swiper-container', {
       // تنظیمات Swiper به دلخواه شما
       slidesPerView: 3,
-      spaceBetween: 2,
+      spaceBetween: 1,
       pagination: {
         el: '.swiper-pagination',
         clickable: true,

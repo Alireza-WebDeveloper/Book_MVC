@@ -26,7 +26,7 @@ const controllerLoadBook = async () => {
     FavoriteView._loadFavoriteWithLocalStorage();
     updateBookWithFavoriteList(FavoriteView.data);
     BookView._render(Model.Store.bookSearch);
-    BookCarouselView._render(Model.Store.book.slice(7, 13));
+    BookCarouselView._render(Model.Store.book.slice(7, 14));
   } catch (error) {
     BookView._renderError(error.message);
   }
